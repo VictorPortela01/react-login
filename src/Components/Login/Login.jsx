@@ -5,12 +5,16 @@ import { useState } from "react";
 import "./Login.css";
 
 const Login = () => {
+   // Estados para armazenar as entradas do usuário
   const [username, setUsername] = useState("");
   const [password, setPassoword] = useState("");
 
+// Função que é chamada quando o formulário é enviado
   const handleSubmit = (event) => {
+    // Impede que a página seja recarregada
     event.preventDefault();
-    
+
+     // Faz o console log das credenciais do usuário
     alert("Enviando os dados: "+ username + " - " + password)
   };
 
@@ -19,11 +23,13 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
             <h1>Acesse o sistema</h1>
             <div className="input-field">
-                <input type="text" placeholder="Código" onChange={(e) => setUsername(e.target.value)}/>
+                <input type="text" placeholder="Código" required value={username} 
+                onChange={(e) => setUsername(e.target.value)}/>
                 <FaUser className="icon"/>
             </div>
             <div className="input-field">
-                <input type="password"  placeholder="Senha" onChange={(e) => setPassoword(e.target.value)}/>
+                <input type="password"  placeholder="Senha" required value={password}
+                 onChange={(e) => setPassoword(e.target.value)}/>
                 <FaLock className="icon"/>
             </div>
             <div className="recall-forget">
@@ -32,7 +38,7 @@ const Login = () => {
                 Lembre de mim
               </label>
             </div>
-            <button>Entrar</button>
+            <button type="submit">Login</button>
 
         </form>
     </div>
