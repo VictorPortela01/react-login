@@ -1,0 +1,54 @@
+.container { 
+    width: 450px;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.container .input-field {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px auto;
+}
+
+.input-field input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 20px 45px;
+}
+
+
+.input-field .icon {
+    position: absolute;
+    right: 15px;
+    top: 35%;
+    transform: translate(-30%);
+    font-size: 18px;
+}
+
+.recall-forget input {
+    margin-right: 10px;
+}
+
+.container button {
+    margin-top: 15px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) ;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
