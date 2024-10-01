@@ -21,7 +21,9 @@ const Login = () => {
   return (
     <div className="container">
         <form onSubmit={handleSubmit}>
-            <h1>Acesse o sistema</h1>
+            <h1>CERVEJARIA</h1> 
+            <h2>ambev</h2>
+            <h1>DISSOBEL</h1>
             <div className="input-field">
                 <input type="text" placeholder="Código" required value={username} 
                 onChange={(e) => setUsername(e.target.value)}/>
@@ -35,7 +37,7 @@ const Login = () => {
             <div className="recall-forget">
               <label>
                 <input type="checkbox"/>
-                Lembre de mim
+                Recordar dados
               </label>
             </div>
             <button type="submit">Login</button>
