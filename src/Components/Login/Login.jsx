@@ -1,21 +1,36 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
-
-
+import { useAuth  } from "../../Contexts/AuthContext";
 import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth(); // Função de login do contexto
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    /*Essa parte está dando erro por conta do 'success' não está vinculado a nada ainda. */
-    if (success) {
-      alert("Login bem-sucedido!");
-    } else {
-      alert("Falha no login, verifique suas credenciais.");
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        login(data.token); // Armazena o token no contexto ou localStorage
+        alert("Login bem-sucedido!");
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Erro durante o login:", error);
+      alert("Ocorreu um erro, tente novamente mais tarde.")
     }
   };
 
@@ -51,7 +66,7 @@ const Login = () => {
             Recordar dados
           </label>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Enviar</button>
       </form>
     </div>
   );
