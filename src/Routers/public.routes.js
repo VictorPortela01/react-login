@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import Home from "../Components/home/home";
+import Login from "../Components/Login/Login";
 import Dashboard from "../Routers/Dashboard";
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -10,7 +10,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         <Route 
         {...rest}
         render={(props) => 
-            token ? <Component {...props} /> : <Redirect to="/home"/>
+            token ? <Component {...props} /> : <Redirect to="/login"/>
         }
         />   
     );
@@ -20,9 +20,9 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         return (
             <Router>
               <Switch>
-                <Route path="/home" component={Login} />
+                <Route path="/login" component={Login} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
-                <Redirect from="/" to="/home" />
+                <Redirect from="/" to="/login" />
               </Switch>
             </Router>
           );

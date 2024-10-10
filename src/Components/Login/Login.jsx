@@ -1,36 +1,39 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
-import { useAuth  } from "../../Contexts/AuthContext";
+import { useAuth } from "../../Contexts/AuthContext"; // Importação do contexto de autenticação
+import axios from "axios";
 import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post("http://localhost:5000/login", {
+        username,
+        password,
       });
 
-      const data = await response.json();
+      // Verifica se o login foi bem-sucedido
+      const token = response.data.token;
+      if (token) {
+        // Armazena o token no localStorage
+        localStorage.setItem("token", token);
+        
+        // Chama a função de login do contexto, passando o token
+        login(token);
 
-      if (response.ok) {
-        login(data.token); // Armazena o token no contexto ou localStorage
         alert("Login bem-sucedido!");
-      } else {
-        alert(data.error);
       }
-    } catch (error) {
-      console.error("Erro durante o login:", error);
-      alert("Ocorreu um erro, tente novamente mais tarde.")
+    } catch (err) {
+      console.error("Erro durante o login:", err);
+      alert("Usuário ou senha inválidos. Tente novamente.");
     }
   };
 
@@ -40,6 +43,7 @@ const Login = () => {
         <h1>CERVEJARIA</h1>
         <h2>ambev</h2>
         <h1>DISSOBEL</h1>
+
         <div className="input-field">
           <input
             type="text"
@@ -50,6 +54,7 @@ const Login = () => {
           />
           <FaUser className="icon" />
         </div>
+
         <div className="input-field">
           <input
             type="password"
@@ -60,13 +65,17 @@ const Login = () => {
           />
           <FaLock className="icon" />
         </div>
+
+        {error && <p className="error-message">{error}</p>}
+
         <div className="recall-forget">
           <label>
             <input type="checkbox" />
-            Recordar dados
+            Lembrar dados
           </label>
         </div>
-        <button type="submit">Enviar</button>
+
+        <button type="submit">Entrar</button>
       </form>
     </div>
   );
