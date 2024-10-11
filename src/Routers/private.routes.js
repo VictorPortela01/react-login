@@ -1,31 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import Home from "../Components/home/home";
+import { BrowserRouter as Router, Route, Redirect, Routes } from "react-router-dom";
+import Home from "../Components/Home/Home";
 import Dashboard from "../Routers/Dashboard";
+import Login from "../Components/Login/Login" //Importe o Login
 
-const PrivateRoute = ({component: Component, ...rest}) => {
-    const token = localStorage.getItem("token");
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
 
-    return (
-        <Route 
-        {...rest}
-        render={(props) => 
-            token ? <Component {...props} /> : <Redirect to="/home"/>
-        }
-        />   
-    );
+  return token ? children : <Navigate to="/home" />;
 };
 
-    function App() {
-        return (
-            <Router>
-              <Switch>
-                <Route path="/home" component={Login} />
-                <PrivateRoute path="/dashboard" component={Dashboard} />
-                <Redirect from="/" to="/home" />
-              </Switch>
-            </Router>
-          );
-        }
-        
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+      <Route path="/" element={<Navigate to="/home"/>} />
+      </Routes>
+    </Router>
+  );
+}
+
 export default App
