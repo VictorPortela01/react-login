@@ -15,6 +15,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port : process.env.DB_PORT || 3306,
 });
 
 // Conectar ao banco de dados
@@ -23,7 +24,7 @@ db.connect((err) => {
   console.log("Conectado ao banco de dados.");
 });
 
-const SECRET_KEY = process.env.JWT_SECRET || "seu_segredo"; // Melhor usar uma variável de ambiente
+const SECRET_KEY = process.env.JWT_SECRET; // Melhor usar uma variável de ambiente
 
 // Rota para login
 app.post("/login", (req, res) => {
