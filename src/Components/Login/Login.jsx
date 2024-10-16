@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../../Contexts/AuthContext"; // Importação do contexto de autenticação
 import axios from "axios";
 import "./Login.css";
+import "../../App.css"
 
 const Login = () => {
   const [username, setUsername] = useState("");
