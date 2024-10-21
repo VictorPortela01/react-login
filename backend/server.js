@@ -2,29 +2,15 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const mysql = require("mysql2");
+const db = require("./models/db")
+const User = require("./models/User")
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuração do banco de dados
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'meu_banco_de_dados',
-  port : 3306,
-});
-
-// Conectar ao banco de dados
-db.connect((err) => {
-  if (err) throw err;
-  console.log("Conectado ao banco de dados.");
-});
-
-const SECRET_KEY = process.env.JWT_SECRET; // Melhor usar uma variável de ambiente
+const SECRET_KEY = "seu_segredo"; // Melhor usar uma variável de ambiente
 
 // Rota para login
 app.post("/login", (req, res) => {
@@ -77,8 +63,16 @@ app.get("/dashboard", verifyToken, (req, res) => {
   res.json({ message: `Bem-vindo ao dashboard, ${req.user.username}!` });
 });
 
+app.get("/login", async(req, res) => {
+  res.send("Página de teste")
+})
+
+app.post("/cadastrar", async (req, res) => {
+  res.send("Página cadastrar")
+})
+
 // Iniciar o servidor
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(5000, () => {
+  console.log(`Servidor rodando na porta 5000`);
 });
+
