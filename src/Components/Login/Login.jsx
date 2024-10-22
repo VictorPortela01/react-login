@@ -6,7 +6,7 @@ import "./Login.css";
 import "../../App.css"
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
@@ -15,8 +15,8 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post("http://localhost:5000", {
-        username,
+      const response = await axios.post("http://localhost:5000/login", {
+        cpf,
         password,
       });
 
@@ -49,8 +49,8 @@ const Login = () => {
             type="text"
             placeholder="Código"
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
           />
           <FaUser className="icon" />
         </div>

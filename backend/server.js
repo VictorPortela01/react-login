@@ -14,11 +14,11 @@ const SECRET_KEY = "seu_segredo"; // Melhor usar uma variável de ambiente
 
 // Rota para login
 app.post("/login", (req, res) => {
-  const { username, password } = req.body;
+  const {cpf, password} = req.body
 
   // Verificar se o usuário existe no banco de dados
-  const query = "SELECT * FROM users WHERE email = ?";
-  db.query(query, [username], (err, result) => {
+  const query = "SELECT * FROM usuarios WHERE nome = 'Victor'";
+  db.query(query, [cpf], (err, result) => {
     if (err) throw err;
 
     if (result.length === 0) {
@@ -36,7 +36,7 @@ app.post("/login", (req, res) => {
       }
 
       // Gerar token JWT
-      const token = jwt.sign({ username: user.username }, SECRET_KEY, {
+      const token = jwt.sign({ cpf: user.cpf }, SECRET_KEY, {
         expiresIn: "1h",
       });
 
@@ -51,7 +51,9 @@ const verifyToken = (req, res, next) => {
   if (!token) return res.status(403).json({ error: "Token não fornecido" });
 
   jwt.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) return res.status(403).json({ error: "Token inválido" });
+    if (err) {
+      return res.status(403).json({ error: "Token inválido" });
+    }
 
     req.user = decoded;
     next();
@@ -60,15 +62,12 @@ const verifyToken = (req, res, next) => {
 
 // Rota protegida
 app.get("/dashboard", verifyToken, (req, res) => {
-  res.json({ message: `Bem-vindo ao dashboard, ${req.user.username}!` });
+  res.json({ message: `Bem-vindo ao dashboard, ${req.user.cpf}!` });
 });
 
-app.get("/login", async(req, res) => {
-  res.send("Página de teste")
-})
-
-app.post("/cadastrar", async (req, res) => {
-  res.send("Página cadastrar")
+// Rota de teste POST
+app.post("/", async(req, res) => {
+  res.send("requisição do POST recebida!")
 })
 
 // Iniciar o servidor
