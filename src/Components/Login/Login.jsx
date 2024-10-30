@@ -6,29 +6,29 @@ import "./Login.css";
 import "../../App.css"
 
 const Login = () => {
-  const [cpf, setCpf] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+
+    if(!username || !password) {
+      setError("Por favor, preencha todos os campos.")
+      return
+    }
     try {
       const response = await axios.post("http://localhost:5000/login", {
-        cpf,
+        username,
         password,
       });
 
       // Verifica se o login foi bem-sucedido
       const token = response.data.token;
       if (token) {
-        // Armazena o token no localStorage
-        localStorage.setItem("token", token);
-        
-        // Chama a função de login do contexto, passando o token
+        localStorage.setItem("token", token)
         login(token);
-
         alert("Login bem-sucedido!");
       }
     } catch (err) {
@@ -49,8 +49,8 @@ const Login = () => {
             type="text"
             placeholder="Código"
             required
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <FaUser className="icon" />
         </div>
