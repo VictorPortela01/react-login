@@ -29,14 +29,21 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Usuário não encontrado" });
     }
        
+   // Verificar se o campo senha está definido
+   if (!user.senha) {
+    return res.status(400).json({ message: "Senha não encontrada no banco de dados." });
+  }
+
     // Verificar se a senha está correta
     const isMatch = await bcrypt.compare(password, user.senha);
+
     if (!isMatch) {
       return res.status(400).json({ message: "Senha incorreta" });
     }
 
     // Gerar token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: "1h" });
+    
     return res.json({ token, message: "Login bem-sucedido" });
   } catch (error) {
     console.error("Erro durante o login:", error);
