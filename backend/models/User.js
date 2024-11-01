@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('./db')
 
 
-const User = db.define("usuarios", {
+const User = db.define("users", {
     id : {
         type:Sequelize.INTEGER,
         autoIncrement: true,
@@ -14,7 +14,7 @@ const User = db.define("usuarios", {
         allowNull: false,
         unique: true
     },
-    nome: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -27,7 +27,8 @@ const User = db.define("usuarios", {
 //Para criar usuarios é só descomentar e criar com nodemon
 // Usuario.crete({
 //cpf : "",
-//nome : ""
+//nome : "",
+//senha : 
 //})
 
 //Verificar se há alguma diferença na tabela, realizada a alteração

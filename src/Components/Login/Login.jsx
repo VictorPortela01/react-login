@@ -2,6 +2,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import { useAuth } from "../../Contexts/AuthContext"; // Importação do contexto de autenticação
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Importando useNavigate
 import "./Login.css";
 import "../../App.css"
 
@@ -10,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
+  const navigate = useNavigate(); // Hook de navegação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ const Login = () => {
         localStorage.setItem("token", token)
         login(token);
         alert("Login bem-sucedido!");
+        navigate("/home"); // Redirecionando para a página de destino
       }
     } catch (err) {
       console.error("Erro durante o login:", err);

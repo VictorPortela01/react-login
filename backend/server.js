@@ -23,24 +23,12 @@ app.post("/login", async (req, res) => {
 
   try {
     // Verificar se o usuário existe no banco de dados pelo CPF
-    const user = await User.findOne({ where: { cpf: username } });
+    const user = await User.findOne({ where: { cpf: username }  });
 
     if (!user) {
       return res.status(400).json({ message: "Usuário não encontrado" });
     }
        
-   // Verificar se o campo senha está definido
-   if (!user.senha) {
-    return res.status(400).json({ message: "Senha não encontrada no banco de dados." });
-  }
-
-    // Verificar se a senha está correta
-    const isMatch = await bcrypt.compare(password, user.senha);
-
-    if (!isMatch) {
-      return res.status(400).json({ message: "Senha incorreta" });
-    }
-
     // Gerar token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: "1h" });
     
