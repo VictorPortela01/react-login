@@ -1,31 +1,31 @@
-import React, { createContext, useState, useContext } from "react";
+// AuthContext.js
+import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => {
-    // Tenta recuperar o token do localStorage ao carregar a página
-    const storedToken = localStorage.getItem("token");
-    return storedToken ? storedToken : null;
-  });
+  const [token, setToken] = useState(null);
+  const [userData, setUserData] = useState(null); // Armazena os dados do usuário
 
-  const login = (token) => {
-    setToken(token); // Armazena o token no estado
-    localStorage.setItem("token", token); // Armazena o token no localStorage
+  const login = (token, user) => {
+    setToken(token);
+    setUserData(user); // Salva os dados do usuário
+    localStorage.setItem("token", token);
+    localStorage.setItem("userData", JSON.stringify(user)); // Salva os dados no localStorage
   };
 
   const logout = () => {
-    setToken(null); // Remove o token do estado
-    localStorage.removeItem("token"); // Remove o token do localStorage
+    setToken(null);
+    setUserData(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
   };
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, userData, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-}; 
-
-export const useAuth = () => {
-  return useContext(AuthContext);
 };
+
+export const useAuth = () => useContext(AuthContext);

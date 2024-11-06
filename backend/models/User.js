@@ -29,6 +29,8 @@ const User = db.define("users", {
     }
 })
 
+
+
 //Para criar usuarios é só descomentar e criar com nodemon
 // Usuario.crete({
 //cpf : "",

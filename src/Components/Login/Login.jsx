@@ -1,42 +1,42 @@
+// Login.js
 import { FaUser, FaLock } from "react-icons/fa";
 import { useState } from "react";
-import { useAuth } from "../../Contexts/AuthContext"; // Importação do contexto de autenticação
+import { useAuth } from "../../Contexts/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Importando useNavigate
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import "../../App.css"
+import "../../App.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
-  const navigate = useNavigate(); // Hook de navegação
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!username || !password) {
-      setError("Por favor, preencha todos os campos.")
-      return
+    if (!username || !password) {
+      setError("Por favor, preencha todos os campos.");
+      return;
     }
+
     try {
       const response = await axios.post("http://localhost:5000/login", {
         username,
         password,
       });
 
-      // Verifica se o login foi bem-sucedido
-      const token = response.data.token;
+      const { token, user } = response.data; // Recebe o token e os dados do usuário
       if (token) {
-        localStorage.setItem("token", token)
-        login(token);
+        login(token, user); // Armazena o token e os dados do usuário no contexto
         alert("Login bem-sucedido!");
-        navigate("/home"); // Redirecionando para a página de destino
+        navigate("/home"); // Redireciona para a página de destino
       }
     } catch (err) {
       console.error("Erro durante o login:", err);
-      alert("Usuário ou senha inválidos. Tente novamente.");
+      setError("Usuário ou senha inválidos. Tente novamente.");
     }
   };
 

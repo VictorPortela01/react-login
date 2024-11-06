@@ -8,13 +8,25 @@ require('dotenv').config();
 
 const app = express()
 app.use(cors({
-  origin:true,
+  origin: true,
   method: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
 app.use(express.json())
 
 const SECRET_KEY = "seu_segredo"; // Melhor utilizar uma variável de ambiente
+
+// Rota GET para buscar todos os usuários
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.findAll(); // Busca todos os registros na tabela "users"
+    res.json(users);  // Retorna os dados em formato JSON
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    res.status(500).send('Erro ao buscar usuários');
+  }
+});
+
 
 // Rota para login
 app.post("/login", async (req, res) => {
@@ -23,15 +35,27 @@ app.post("/login", async (req, res) => {
 
   try {
     // Verificar se o usuário existe no banco de dados pelo CPF
-    const user = await User.findOne({ where: { cpf: username }  });
+    const user = await User.findOne({ where: { cpf: username } });
 
     if (!user) {
       return res.status(400).json({ message: "Usuário não encontrado" });
     }
-       
+
     // Gerar token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: "1h" });
-    
+
+     // Inclua as informações do usuário na resposta
+     return res.json({
+      token,
+      user: {
+        id: user.id,
+        cpf: user.cpf,
+        name: user.name,
+        codigo: user.codigo,
+      },
+      message: "Login bem-sucedido",
+    });
+
     return res.json({ token, message: "Login bem-sucedido" });
   } catch (error) {
     console.error("Erro durante o login:", error);

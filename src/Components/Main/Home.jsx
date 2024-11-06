@@ -1,7 +1,15 @@
 import React from 'react';
 import './home.css';
+import { useAuth } from "../../Contexts/AuthContext";
+
 
 export const Home = () => {
+  const { userData } = useAuth(); // Pega os dados do usuário autenticado
+
+  if (!userData) {
+    return <p>Carregando...</p>;
+  }
+
   return (
       <div>
         <div className="container1">
@@ -10,9 +18,9 @@ export const Home = () => {
               alt="Profile picture"
               src="https://storage.googleapis.com/a1aa/image/ghQCOQV12KooD1DZxKxBk3CHmezjHwKWnT0xFBgrxW0p6jzJA.jpg"
             />
-            <p>COD - XXX</p>
-            <p>NOME - Teste teste</p>
-            <p>FUNÇÃO - função</p>
+            <p>COD - {userData.codigo}</p>
+            <p>NOME - {userData.name}</p>
+            <p>FUNÇÃO - Motorista</p>
           </div>
           <div className="main-content">
             <h1>METAS</h1>

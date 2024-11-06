@@ -6,4 +6,5 @@ const sequelize = new Sequelize('metas','root', '', {
 })
 
 
+
 module.exports = sequelize;
