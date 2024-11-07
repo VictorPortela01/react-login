@@ -34,10 +34,10 @@ export const Home = () => {
               </div>
               <div className="grid-item">
                 <img
-                  alt="Devolução gauge"
-                  src="https://storage.googleapis.com/a1aa/image/cpeDbSJda7XNLKbgGbgUDKZRaj0wlq1vIpxnsdLjiduq6jzJA.jpg"
+                  alt="TML gauge"
+                  src="https://storage.googleapis.com/a1aa/image/sSzcQXnWNr6JPNyILfgvQN4mjQcb5JExwSafrHNUxkmP1HnTA.jpg"
                 />
-                <p>DEVOLUÇÃO</p>
+                <p>TML</p>
               </div>
               <div className="grid-item">
                 <img
@@ -48,18 +48,20 @@ export const Home = () => {
               </div>
               <div className="grid-item">
                 <img
+                  alt="Devolução gauge"
+                  src="https://storage.googleapis.com/a1aa/image/cpeDbSJda7XNLKbgGbgUDKZRaj0wlq1vIpxnsdLjiduq6jzJA.jpg"
+                />
+                <p>DEVOLUÇÃO</p>
+              </div>
+             
+              <div className="grid-item">
+                <img
                   alt="Avarias gauge"
                   src="https://storage.googleapis.com/a1aa/image/fSAzKp50ptSEIq1iUFLY6rUEpDRhum37sdZmp63acs9l6jzJA.jpg"
                 />
                 <p>AVARIAS</p>
               </div>
-              <div className="grid-item">
-                <img
-                  alt="TML gauge"
-                  src="https://storage.googleapis.com/a1aa/image/sSzcQXnWNr6JPNyILfgvQN4mjQcb5JExwSafrHNUxkmP1HnTA.jpg"
-                />
-                <p>TML</p>
-              </div>
+              
               <div className="grid-item">
                 <img
                   alt="ValorCX gauge"
