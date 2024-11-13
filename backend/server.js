@@ -1,20 +1,46 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const User = require("./models/User"); // Importação do modelo User definido com Sequelize
-
+const xlsx = require('xlsx');
 require('dotenv').config();
 
-const app = express()
+const app = express();
+
 app.use(cors({
   origin: true,
-  method: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
-}))
-app.use(express.json())
+}));
 
-const SECRET_KEY = "seu_segredo"; // Melhor utilizar uma variável de ambiente
+app.use(express.json());
+
+// Função para ler e filtrar os dados da planilha
+function getDriverData(driverId) {
+  try {
+    const workbook = xlsx.readFile("../planilhas/Teste01.xlsx"); // Corrigido o caminho do arquivo
+    const sheet = workbook.Sheets[workbook.SheetNames[0]]; // Seleciona a primeira aba
+    const data = xlsx.utils.sheet_to_json(sheet);
+
+    // Filtra os dados pelo código do motorista
+    return data.find(row => row['COD'] === driverId);
+  } catch (error) {
+    console.error("Erro ao ler a planilha:", error);
+    return null;
+  }
+}
+// Rota GET para buscar na planilhas
+app.get('/getDriverData', (req, res) => {
+  const { driverId } = req.body;
+  const driverData = getDriverData(driverId);
+  if (driverData) {
+    res.json(driverData);
+  } else {
+    res.status(404).json({ message: 'Motorista não encontrado' });
+  }
+});
+
+const SECRET_KEY = "seu_segredo"; // Utilizando variável de ambiente
 
 // Rota GET para buscar todos os usuários
 app.get('/users', async (req, res) => {
@@ -27,10 +53,8 @@ app.get('/users', async (req, res) => {
   }
 });
 
-
 // Rota para login
 app.post("/login", async (req, res) => {
-  console.log(req.body)
   const { username, password } = req.body;
 
   try {
@@ -44,8 +68,8 @@ app.post("/login", async (req, res) => {
     // Gerar token JWT
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: "1h" });
 
-     // Inclua as informações do usuário na resposta
-     return res.json({
+    // Inclua as informações do usuário na resposta
+    return res.json({
       token,
       user: {
         id: user.id,
@@ -56,7 +80,6 @@ app.post("/login", async (req, res) => {
       message: "Login bem-sucedido",
     });
 
-    return res.json({ token, message: "Login bem-sucedido" });
   } catch (error) {
     console.error("Erro durante o login:", error);
     return res.status(500).json({ message: "Erro no servidor" });
