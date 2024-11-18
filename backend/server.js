@@ -1,45 +1,20 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const User = require("./models/User"); // Importação do modelo User definido com Sequelize
-const xlsx = require('xlsx');
-require('dotenv').config();
+const User = require("./models/User")
+const Teste36 = require("./models/Teste36"); 
 
 const app = express();
 
 app.use(cors({
   origin: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
 }));
 
 app.use(express.json());
 
-// Função para ler e filtrar os dados da planilha
-function getDriverData(driverId) {
-  try {
-    const workbook = xlsx.readFile("../planilhas/Teste01.xlsx"); // Corrigido o caminho do arquivo
-    const sheet = workbook.Sheets[workbook.SheetNames[0]]; // Seleciona a primeira aba
-    const data = xlsx.utils.sheet_to_json(sheet);
 
-    // Filtra os dados pelo código do motorista
-    return data.find(row => row['COD'] === driverId);
-  } catch (error) {
-    console.error("Erro ao ler a planilha:", error);
-    return null;
-  }
-}
-// Rota GET para buscar na planilhas
-app.get('/getDriverData', (req, res) => {
-  const { driverId } = req.body;
-  const driverData = getDriverData(driverId);
-  if (driverData) {
-    res.json(driverData);
-  } else {
-    res.status(404).json({ message: 'Motorista não encontrado' });
-  }
-});
-
+ 
 const SECRET_KEY = "seu_segredo"; // Utilizando variável de ambiente
 
 // Rota GET para buscar todos os usuários
@@ -52,6 +27,15 @@ app.get('/users', async (req, res) => {
     res.status(500).send('Erro ao buscar usuários');
   }
 });
+
+app.get('/teste', async (req, res )=>{
+  try {
+    const teste36 = await Teste36.findAll()
+    res.json(teste36)
+  }catch (error) {
+    console.error('Erro ')
+  }
+})
 
 // Rota para login
 app.post("/login", async (req, res) => {
@@ -72,10 +56,9 @@ app.post("/login", async (req, res) => {
     return res.json({
       token,
       user: {
-        id: user.id,
         cpf: user.cpf,
         name: user.name,
-        codigo: user.codigo,
+        codigo: user.codigo
       },
       message: "Login bem-sucedido",
     });

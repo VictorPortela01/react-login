@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
-const db = require('./db')
-
+const db = require('./db');
 
 const User = db.define("users", {
     id : {
@@ -28,7 +27,6 @@ const User = db.define("users", {
         allowNull: false
     }
 })
-
 
 
 //Para criar usuarios é só descomentar e criar com nodemon
