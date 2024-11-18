@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const User = require("./models/User")
-const Teste36 = require("./models/Teste36"); 
+const Teste36 = require("./models/Teste36");
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 
- 
+
 const SECRET_KEY = "seu_segredo"; // Utilizando variável de ambiente
 
 // Rota GET para buscar todos os usuários
@@ -28,14 +28,33 @@ app.get('/users', async (req, res) => {
   }
 });
 
-app.get('/teste', async (req, res )=>{
+app.get('/teste', async (req, res) => {
   try {
     const teste36 = await Teste36.findAll()
     res.json(teste36)
-  }catch (error) {
+  } catch (error) {
     console.error('Erro ')
   }
 })
+
+// Nova rota GET para buscar dados da tabela Teste36 por código
+app.get('/teste/:codigo', async (req, res) => {
+  const { codigo } = req.params;
+  console.log("Código recebido no backend:", codigo); // Debug
+
+  try {
+    const registro = await Teste36.findOne({ where: { codigo } });
+
+    if (!registro) {
+      return res.status(404).json({ error: "Registro não encontrado para o código fornecido." });
+    }
+
+    res.json(registro);
+  } catch (error) {
+    console.error('Erro ao buscar registro por código:', error);
+    res.status(500).json({ error: "Erro no servidor." });
+  }
+});
 
 // Rota para login
 app.post("/login", async (req, res) => {

@@ -7,71 +7,85 @@ import { useAuth } from "../../Contexts/AuthContext";
 
 export const Home = () => {
   const { userData } = useAuth(); // Pega os dados do usuário autenticado
-  const {userGoals, setUseGoals} = useState(null)
-  
+  const [userGoals, setUserGoals] = useState({}); // Declaração correta do estado
+
   useEffect(() => {
-    if(userData) {
-      axios.get('http://localhost:5000/user?userId=${userData.codigo}')
-      .then(response => setUserGoals(response.data))
-      .catch(error => console.error("Erro ao carregar dados do usuário:",error))
+    if (userData) {
+      axios
+        .get(`http://localhost:5000/teste/${userData.codigo}`)
+        .then((response) => {
+          console.log("Resposta do backend:", response.data); // Debug
+          setUserGoals(response.data);
+        })
+        .catch((error) => {
+          console.error("Erro ao carregar dados do usuário:", error);
+        });
     }
   }, [userData])
-  if (!userData) {
+
+  if (!userData || userGoals === null) {
     return <p>Carregando dados do usuário...</p>;
   }
- 
+  
+  if (Object.keys(userGoals).length === 0) {
+    return <p>Nenhuma meta encontrada para o usuário.</p>;
+  }
+  
+
   return (
-      <div>
-        <div className="container1">
+    <div>
+      <div className="container1">
         <div className="sidebar">
-            <img
-              alt="Profile picture"
-              src="https://storage.googleapis.com/a1aa/image/ghQCOQV12KooD1DZxKxBk3CHmezjHwKWnT0xFBgrxW0p6jzJA.jpg"
-            />
-            <p>COD - {userData.codigo}</p>
-            <p>NOME - {userData.name}</p>
-            <p>FUNÇÃO - Motorista</p>
-          </div>
-          <div className="main-content">
-            <h1>METAS</h1>
-            <div className="grid-container">
-              <div className="grid-item">
-                <p>RATING</p> 
-              
-                </div>
-              <div className="grid-item">
-              
-                <p>DEVOLUÇÃO</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>VALES</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>AVARIAS</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>TML</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>VALORCX</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>TENDÊNCIA MÊS</p>
-              </div>
-              <div className="grid-item">
-              
-                <p>INCENTIVO</p>
-              </div>
+          <img
+            alt="Profile picture"
+            src="https://storage.googleapis.com/a1aa/image/ghQCOQV12KooD1DZxKxBk3CHmezjHwKWnT0xFBgrxW0p6jzJA.jpg"
+          />
+          <p>COD - {userData.codigo}</p>
+          <p>NOME - {userData.name}</p>
+          <p>FUNÇÃO - Motorista</p>
+        </div>
+        <div className="main-content">
+          <h1>METAS</h1>
+          <div className="grid-container">
+            <div className="grid-item">
+              <p>RATING</p>
+              <p>{userGoals.rating || 'N/A'}</p>
+            </div>
+            <div className="grid-item">
+
+              <p>DEVOLUÇÃO</p>
+            </div>
+            <div className="grid-item">
+              <p>VALES</p>
+              <p>{userGoals.vales || 'N/A'}</p>
+
+            </div>
+            <div className="grid-item">
+
+              <p>AVARIAS</p>
+            </div>
+            <div className="grid-item">
+              <p>TML</p>
+                            <p>{userGoals.tml || 'N/A'}</p>
+
+            </div>
+            <div className="grid-item">
+
+              <p>VALORCX</p>
+            </div>
+            <div className="grid-item">
+
+              <p>TENDÊNCIA MÊS</p>
+            </div>
+            <div className="grid-item">
+
+              <p>INCENTIVO</p>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 export default Home;
