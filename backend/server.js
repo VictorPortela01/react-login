@@ -77,7 +77,8 @@ app.post("/login", async (req, res) => {
       user: {
         cpf: user.cpf,
         name: user.name,
-        codigo: user.codigo
+        codigo: user.codigo,
+        função: user.função
       },
       message: "Login bem-sucedido",
     });

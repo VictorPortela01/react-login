@@ -26,11 +26,11 @@ export const Home = () => {
   if (!userData || userGoals === null) {
     return <p>Carregando dados do usuário...</p>;
   }
-  
+
   if (Object.keys(userGoals).length === 0) {
     return <p>Nenhuma meta encontrada para o usuário.</p>;
   }
-  
+
 
   return (
     <div>
@@ -42,9 +42,10 @@ export const Home = () => {
           />
           <p>COD - {userData.codigo}</p>
           <p>NOME - {userData.name}</p>
-          <p>FUNÇÃO - Motorista</p>
+          <p>FUNÇÃO - {userData.função}</p>
         </div>
         <div className="main-content">
+          
           <h1>METAS</h1>
           <div className="grid-container">
             <div className="grid-item">
@@ -52,8 +53,8 @@ export const Home = () => {
               <p>{userGoals.rating || 'N/A'}</p>
             </div>
             <div className="grid-item">
-
               <p>DEVOLUÇÃO</p>
+              <p>{userGoals.devolução || 'N/A'}</p>
             </div>
             <div className="grid-item">
               <p>VALES</p>
@@ -66,12 +67,12 @@ export const Home = () => {
             </div>
             <div className="grid-item">
               <p>TML</p>
-                            <p>{userGoals.tml || 'N/A'}</p>
+              <p>{userGoals.tml || 'N/A'}</p>
 
             </div>
             <div className="grid-item">
-
               <p>VALORCX</p>
+              <p>{userGoals.valorcx || 'N/A'}</p>
             </div>
             <div className="grid-item">
 

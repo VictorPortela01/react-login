@@ -2,8 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('./db');
 
 const User = db.define("users", {
-    id : {
-        type:Sequelize.INTEGER,
+    id: {
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
@@ -15,34 +15,43 @@ const User = db.define("users", {
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     codigo: {
         type: Sequelize.INTEGER,
-        allowNull : false,
+        allowNull: false,
         unique: true
+    },
+    função: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
     senha: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     }
 })
 
+    User.sync({ force: false }) // Ou { alter: true } se for necessário atualizar a estrutura
+    .then(() => console.log('Tabela User sincronizada com sucesso!'))
+    .catch(err => console.error('Erro ao sicronizar a tabela User', err))
+
+module.exports = User
 
 //Para criar usuarios é só descomentar e criar com nodemon
 // Usuario.crete({
 //cpf : "",
 //nome : "",
-//senha : 
+//senha :
 //})
 
 //Verificar se há alguma diferença na tabela, realizada a alteração
-//User.sync({ alter: true })
-   // .then(() => {
-   //     console.log("Tabela sicronizada com sucesso.")
-   // })
-   // .catch(err => {
-   //     console.error("Erro ao sicronizar tabela:",err)
-  //  })
+//User.sync({ alter: false })
+// .then(() => {
+//     console.log("Tabela sicronizada com sucesso.")
+// })
+// .catch(err => {
+//     console.error("Erro ao sicronizar tabela:",err)
+//  })
 
-module.exports = User
+

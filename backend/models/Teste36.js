@@ -23,10 +23,18 @@ const Teste36 = db.define('teste36', {
   vales: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+  valorcx: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  devolução: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
-Teste36.sync({ force: false })  // Ou { alter: true } se for necessário atualizar a estrutura
+  Teste36.sync({ force: false })  // Ou { alter: true } se for necessário atualizar a estrutura
   .then(() => console.log('Tabela Teste36 sincronizada com sucesso!'))
   .catch(err => console.error('Erro ao sincronizar tabela Teste36:', err));
   
