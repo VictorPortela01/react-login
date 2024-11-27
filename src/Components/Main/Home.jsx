@@ -45,6 +45,33 @@ export const Home = () => {
           <p>FUNÇÃO - {userData.função}</p>
         </div>
         <div className="main-content">
+         <div className="static-table">
+            <h2>Tabela Estática</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>RATING</th>
+                  <th>TML</th>
+                  <th>DEVOLUÇÃO</th>
+                  <th>VALES</th>
+                  <th>CHECKLIST</th>
+                  <th>BOLETO</th>
+                  <th>COMBUSTIVEL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>4.95</td>
+                  <td>30:00</td>
+                  <td>2,00%</td>
+                  <td>2,00</td>
+                  <td>90%</td>
+                  <td>0</td>
+                  <td>BATEU | NÃO BATEU</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
           
           <h1>METAS</h1>
           <div className="grid-container">
@@ -57,13 +84,12 @@ export const Home = () => {
               <p>{userGoals.devolução || 'N/A'}</p>
             </div>
             <div className="grid-item">
-              <p>VALES</p>
-              <p>{userGoals.vales || 'N/A'}</p>
-
+            <p>CHECKLIST</p>
+            <p>{userGoals.checklist || 'N/A'}</p>  
             </div>
             <div className="grid-item">
-
-              <p>AVARIAS</p>
+              <p>COMBUSTÍVEL</p>
+              <p>{userGoals.combustivel || 'N/A'}</p>
             </div>
             <div className="grid-item">
               <p>TML</p>
@@ -71,16 +97,19 @@ export const Home = () => {
 
             </div>
             <div className="grid-item">
-              <p>VALORCX</p>
-              <p>{userGoals.valorcx || 'N/A'}</p>
+
+              <p>VALES</p>
+              <p>{userGoals.vales || 'N/A'}</p>              
             </div>
             <div className="grid-item">
-
-              <p>TENDÊNCIA MÊS</p>
+            <p>BOLETO</p>
+            <p>{userGoals.boleto || 'N/A'}</p>  
             </div>
             <div className="grid-item">
+            <p>Valor CX: {userGoals.valorcx}</p>
+            <p>Tendecia: {userGoals.tendencias} </p>
+          
 
-              <p>INCENTIVO</p>
             </div>
           </div>
         </div>

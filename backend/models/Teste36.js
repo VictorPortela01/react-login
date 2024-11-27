@@ -20,7 +20,23 @@ const Teste36 = db.define('teste36', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  devolução: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   vales: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  checklist: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  boleto: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  combustivel: {
     type: Sequelize.STRING,
     allowNull: true
   },
@@ -28,7 +44,7 @@ const Teste36 = db.define('teste36', {
     type: Sequelize.STRING,
     allowNull: true
   },
-  devolução: {
+  tendencias: {
     type: Sequelize.STRING,
     allowNull: true
   }

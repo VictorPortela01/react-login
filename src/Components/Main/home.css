@@ -60,3 +60,39 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
+.static-table {
+    margin-top: 40px;
+    margin-bottom: 100px;
+  }
+.static-table h2{
+    text-align: center;
+}
+  .static-table table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+  
+  .static-table th,
+  .static-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  .static-table thead {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  .static-table th {
+    background-color: #e0e0e0a1;
+    font-weight: bold;
+  }
+  
+  .static-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .static-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
