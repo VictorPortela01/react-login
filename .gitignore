@@ -29,3 +29,8 @@ dist-ssr
 .
 
 teste 21.11.csv
+backend/models/db.js
+backend/package-lock.json
+backend/package.json
+package-lock.json
+package.json
