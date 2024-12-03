@@ -38,12 +38,12 @@ app.get('/teste', async (req, res) => {
 })
 
 // Nova rota GET para buscar dados da tabela Teste36 por código
-app.get('/teste/:codigo', async (req, res) => {
-  const { codigo } = req.params;
-  console.log("Código recebido no backend:", codigo); // Debug
+app.get('/teste/:nome', async (req, res) => {
+  const { nome } = req.params;
+  console.log("Código recebido no backend:", nome); // Debug
 
   try {
-    const registro = await Teste36.findOne({ where: { codigo } });
+    const registro = await Teste36.findOne({ where: { nome } });
 
     if (!registro) {
       return res.status(404).json({ error: "Registro não encontrado para o código fornecido." });

@@ -12,7 +12,7 @@ export const Home = () => {
   useEffect(() => {
     if (userData) {
       axios
-        .get(`http://localhost:5000/teste/${userData.codigo}`)
+        .get(`http://localhost:5000/teste/${userData.name}`)
         .then((response) => {
           console.log("Resposta do backend:", response.data); // Debug
           setUserGoals(response.data);
