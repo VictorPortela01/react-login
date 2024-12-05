@@ -4,7 +4,6 @@ import './home.css';
 import { useAuth } from "../../Contexts/AuthContext";
 
 
-
 export const Home = () => {
   const { userData } = useAuth(); // Pega os dados do usuário autenticado
   const [userGoals, setUserGoals] = useState({}); // Declaração correta do estado
@@ -30,7 +29,10 @@ export const Home = () => {
   if (Object.keys(userGoals).length === 0) {
     return <p>Nenhuma meta encontrada para o usuário.</p>;
   }
-
+  
+  // Condicional para verificar a função e renderizar caixas específicas
+  const isMotorista = userData.função === 'MOTORISTA';
+  const isAjudante = userData.função === 'AJUDANTE';
 
   return (
     <div>
@@ -72,9 +74,13 @@ export const Home = () => {
               </tbody>
             </table>
           </div>  
-          
-          <h1>METAS</h1>
-          <div className="grid-container">
+          <h1>METAS({userData.função})</h1>
+           {/* Renderizar caixas específicas dependendo da função */}
+           {isMotorista && (
+            
+            <div className="grid-container">
+              {/* Caixa específica para motorista */}
+        
             <div className="grid-item">
               <p>RATING</p>
               <p>{userGoals.rating || 'N/A'}</p>
@@ -106,12 +112,42 @@ export const Home = () => {
             <p>{userGoals.boleto || 'N/A'}</p>  
             </div>
             <div className="grid-item">
-            <p>Valor CX: {userGoals.valorcx}</p>
             <p>Tendecia: {userGoals.tendencias} </p>
-          
+            </div>
+            </div>
+          )}
+          {isAjudante && (
+            <div className="grid-container">
+              {/* Caixa específica para ajudante */}
+              <div className="grid-item">
+              <p>RATING</p>
+              <p>{userGoals.rating || 'N/A'}</p>
+            </div>
+            <div className="grid-item">
+              <p>DEVOLUÇÃO</p>
+              <p>{userGoals.devolução || 'N/A'}</p>
+            </div>
+            <div className="grid-item">
+            <p>CHECKLIST</p>
+            <p>{userGoals.checklist || 'N/A'}</p>  
+            </div>
+            
+            <div className="grid-item">
+              <p>TML</p>
+              <p>{userGoals.tml || 'N/A'}</p>
 
             </div>
-          </div>
+            <div className="grid-item">
+              <p>VALES</p>
+              <p>{userGoals.vales || 'N/A'}</p>              
+            </div>
+            
+            <div className="grid-item">
+            <p>Tendecia</p>
+            <p>{userGoals.tendencias} </p>
+            </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
