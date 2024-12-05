@@ -50,7 +50,7 @@ const Login = () => {
         <div className="input-field">
           <input
             type="text"
-            placeholder="Código"
+            placeholder="CPF EX: 12345678901"
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}

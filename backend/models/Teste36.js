@@ -40,10 +40,6 @@ const Teste36 = db.define('teste36', {
     type: Sequelize.STRING,
     allowNull: true
   },
-  valorcx: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
   tendencias: {
     type: Sequelize.STRING,
     allowNull: true

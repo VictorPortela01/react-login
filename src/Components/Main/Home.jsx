@@ -6,7 +6,13 @@ import { useAuth } from "../../Contexts/AuthContext";
 
 export const Home = () => {
   const { userData } = useAuth(); // Pega os dados do usuário autenticado
+  const { logout } = useAuth();
   const [userGoals, setUserGoals] = useState({}); // Declaração correta do estado
+
+  const handleLogout = () => {
+    logout(); // Limpa os dados do usuário
+    window.location.href = "/"; // Redireciona para a página inicial ou de login
+  };
 
   useEffect(() => {
     if (userData) {
@@ -40,15 +46,18 @@ export const Home = () => {
         <div className="sidebar">
           <img
             alt="Profile picture"
-            src="https://storage.googleapis.com/a1aa/image/ghQCOQV12KooD1DZxKxBk3CHmezjHwKWnT0xFBgrxW0p6jzJA.jpg"
+            src="../image.png"
+// src="undefined.jpg"
           />
           <p>COD - {userData.codigo}</p>
           <p>NOME - {userData.name}</p>
-          <p>FUNÇÃO - {userData.função}</p>
+          <p>FUNÇÃO - {userData.função}</p> 
+          <button className="logout-button" onClick={handleLogout}>
+        Sair da Conta
+      </button>
         </div>
         <div className="main-content">
          <div className="static-table">
-            <h2>Tabela Estática</h2>
             <table>
               <thead>
                 <tr>
@@ -100,10 +109,8 @@ export const Home = () => {
             <div className="grid-item">
               <p>TML</p>
               <p>{userGoals.tml || 'N/A'}</p>
-
             </div>
             <div className="grid-item">
-
               <p>VALES</p>
               <p>{userGoals.vales || 'N/A'}</p>              
             </div>
@@ -112,10 +119,12 @@ export const Home = () => {
             <p>{userGoals.boleto || 'N/A'}</p>  
             </div>
             <div className="grid-item">
-            <p>Tendecia: {userGoals.tendencias} </p>
+            <p>TENDECIA</p>
+            <p>{userGoals.tendencias}</p>
             </div>
             </div>
           )}
+
           {isAjudante && (
             <div className="grid-container">
               {/* Caixa específica para ajudante */}
@@ -131,20 +140,21 @@ export const Home = () => {
             <p>CHECKLIST</p>
             <p>{userGoals.checklist || 'N/A'}</p>  
             </div>
-            
             <div className="grid-item">
               <p>TML</p>
               <p>{userGoals.tml || 'N/A'}</p>
-
             </div>
             <div className="grid-item">
               <p>VALES</p>
               <p>{userGoals.vales || 'N/A'}</p>              
             </div>
-            
             <div className="grid-item">
-            <p>Tendecia</p>
-            <p>{userGoals.tendencias} </p>
+            <p>Tendecia</p> 
+            <p>{userGoals.tendencias || "N/A"} </p>
+            </div>
+            <div className="grid-item">
+            <p>AVARIAS</p>
+            <p>{userGoals.avarias || "N/A"} </p>
             </div>
             </div>
           )}
