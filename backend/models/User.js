@@ -32,10 +32,6 @@ const User = db.define("users", {
     }
 })
 
-    User.sync({ force: false }) // Ou { alter: true } se for necessário atualizar a estrutura
-    .then(() => console.log('Tabela User sincronizada com sucesso!'))
-    .catch(err => console.error('Erro ao sicronizar a tabela User', err))
-
 module.exports = User
 
 //Para criar usuarios é só descomentar e criar com nodemon

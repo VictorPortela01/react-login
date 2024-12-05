@@ -50,9 +50,5 @@ const Teste36 = db.define('teste36', {
   }
 })
 
-  Teste36.sync({ force: false })  // Ou { alter: true } se for necessário atualizar a estrutura
-  .then(() => console.log('Tabela Teste36 sincronizada com sucesso!'))
-  .catch(err => console.error('Erro ao sincronizar tabela Teste36:', err));
-  
 
 module.exports = Teste36
