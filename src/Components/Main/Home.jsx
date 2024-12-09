@@ -136,10 +136,7 @@ export const Home = () => {
               <p>DEVOLUÇÃO</p>
               <p>{userGoals.devolução || 'N/A'}</p>
             </div>
-            <div className="grid-item">
-            <p>CHECKLIST</p>
-            <p>{userGoals.checklist || 'N/A'}</p>  
-            </div>
+            
             <div className="grid-item">
               <p>TML</p>
               <p>{userGoals.tml || 'N/A'}</p>
@@ -149,7 +146,7 @@ export const Home = () => {
               <p>{userGoals.vales || 'N/A'}</p>              
             </div>
             <div className="grid-item">
-            <p>Tendecia</p> 
+            <p>TENDECIA</p> 
             <p>{userGoals.tendencias || "N/A"} </p>
             </div>
             <div className="grid-item">
