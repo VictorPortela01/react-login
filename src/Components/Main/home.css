@@ -1,103 +1,154 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f5f7;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
+
 .container1 {
-    display: flex;
-    min-height: 100vh;
-    width: 100vw;
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  justify-content: space-between;
+  padding: 20px;
 }
+
+/* Sidebar */
 .sidebar {
-    width: 20%;
-    background-color: #e0e0e0;
-    padding: 20px;
-    text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 25%;
+  padding: 20px;
+  text-align: center;
 }
+
 .sidebar img {
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 15px;
 }
+
 .sidebar p {
-    margin: 15px 0;
-    font-size: 1.3em;
-    font-weight: 500;
+  margin: 5px 0;
 }
+
+.suggestion-box {
+  margin: auto;
+  margin-top: 200px;
+  padding: 15px;
+  width: 80%;
+  max-width: 300px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-box h4 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+}
+
+.suggestion-box a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.suggestion-box a:hover {
+  text-decoration: underline;
+}
+
+/* Metas Section */
 .main-content {
-    width: 80%;
-    padding: 20px;
+  width: 70%;
+  padding: 20px;
 }
+
 .main-content h1 {
-    text-align: center;
-    font-size: 48px;
-    margin-bottom: 40px;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
 }
+
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  justify-items: center;
 }
+
 .grid-item {
-    width: 180px;
-    height: 180px;
-    background-color: #d3d3d3;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  height: 180px;
+  background-color: #d3d3d3;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .grid-item img {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
 }
+
 .grid-item p {
-    margin-top: 10px;
-    font-size: 1.1em;
-    font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
 }
+
 .static-table {
-    margin-top: 40px;
-    margin-bottom: 100px;
-  }
-.static-table h2{
-    text-align: center;
+  margin-top: 40px;
+  margin-bottom: 100px;
 }
-  .static-table table {
-    width: 100%;
-    border-collapse: collapse;
-    
-  }
-  
-  .static-table th,
-  .static-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  .static-table thead {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  .static-table th {
-    background-color: #e0e0e0a1;
-    font-weight: bold;
-  }
-  
-  .static-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .static-table tr:hover {
-    background-color: #f1f1f1;
-  }
+
+.static-table h2 {
+  text-align: center;
+}
+
+.static-table table {
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+.static-table th,
+.static-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.static-table thead {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.static-table th {
+  background-color: #e0e0e0a1;
+  font-weight: bold;
+}
+
+.static-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.static-table tr:hover {
+  background-color: #f1f1f1;
+}
+
 .logout-button {
   padding: 10px 20px;
+  margin-top: 25px;
   background-color: #ff4d4d;
   color: white;
   border: none;
@@ -107,5 +158,5 @@ body {
 
 .logout-button:hover {
   background-color: #ff1a1a;
-  
+
 }

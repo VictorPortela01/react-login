@@ -17,6 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
     if (!username || !password) {
       setError("Por favor, preencha todos os campos.");
       return;
@@ -31,7 +32,6 @@ const Login = () => {
       const { token, user } = response.data; // Recebe o token e os dados do usuário
       if (token) {
         login(token, user); // Armazena o token e os dados do usuário no contexto
-        alert("Login bem-sucedido!");
         navigate("/home"); // Redireciona para a página de destino
       }
     } catch (err) {
