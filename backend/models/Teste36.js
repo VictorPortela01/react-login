@@ -6,11 +6,12 @@ const Teste36 = db.define('teste36', {
   nome: {
     type: Sequelize.STRING,
     allowNull: false
+    // A condição que puxa as duas planilhas.
   },
   codigo: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    unique: true
+    allowNull: false 
+    // Aqui deveria ser unique:true mas tem códigos de motorista e ajudante que são iguais.
   },
   rating: {
     type: Sequelize.STRING,

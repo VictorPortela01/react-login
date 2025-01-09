@@ -46,8 +46,7 @@ export const Home = () => {
         <div className="sidebar">
           <img
             alt="Profile picture"
-            src="../image.png"
-          // src="undefined.jpg"
+            src='https://img.freepik.com/vetores-premium/homem-dirigindo-carro-personagem-de-desenho-animado-de-motorista-masculino_543062-3574.jpg?w=740'
           />
           <p>COD - {userData.codigo}</p>
           <p>NOME - {userData.name}</p>
@@ -58,7 +57,7 @@ export const Home = () => {
           <div className="suggestion-box">
             <h4>Envie sua Sugestão</h4>
             <p>Número do TI</p>
-            <a href="">(85)8105-9651</a>
+            <p>(85) 8105-9651</p>
           </div>
 
         </div>

@@ -20,7 +20,7 @@ const User = db.define("users", {
     codigo: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true
+        // Aqui tinha um unique:true mas tem códigos de motorista e ajudante igual.
     },
     função: {
         type: Sequelize.STRING,
@@ -29,6 +29,7 @@ const User = db.define("users", {
     senha: {
         type: Sequelize.STRING,
         allowNull: true
+        // A senha não está sendo utilizada no momento
     }
 })
 
