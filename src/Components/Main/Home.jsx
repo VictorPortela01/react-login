@@ -44,10 +44,6 @@ export const Home = () => {
     <div>
       <div className="container1">
         <div className="sidebar">
-          <img
-            alt="Profile picture"
-            src='https://img.freepik.com/vetores-premium/homem-dirigindo-carro-personagem-de-desenho-animado-de-motorista-masculino_543062-3574.jpg?w=740'
-          />
           <p>COD - {userData.codigo}</p>
           <p>NOME - {userData.name}</p>
           <p>FUNÇÃO - {userData.função}</p>
