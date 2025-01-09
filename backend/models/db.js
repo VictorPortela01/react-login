@@ -4,7 +4,12 @@ const sequelize = new Sequelize('metas','root', '', {
     host:process.env.DB_HOST,
     user:process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    dialect:"mysql"
+    dialect:"mysql",
+    dialectOption: {
+        ssl: {
+            rejectUnauthorized:false,
+        },
+    }
 })
 
 
