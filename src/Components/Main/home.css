@@ -1,13 +1,19 @@
+/* Ajustes globais */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f4f5f7;
   margin: 0;
   padding: 0;
   color: #333;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
+/* Layout principal */
 .container1 {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
   width: 100vw;
   justify-content: space-between;
@@ -26,20 +32,20 @@ body {
 
 .sidebar img {
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .sidebar p {
   margin: 5px 0;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 
+/* Sugestões */
 .suggestion-box {
-  margin: auto;
-  margin-top: 200px;
+  margin: 50px auto 0;
   padding: 15px;
   width: 80%;
   max-width: 300px;
@@ -49,44 +55,30 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.suggestion-box h4 {
-  margin: 0 0 10px;
-  font-size: 1.1rem;
-}
-
-.suggestion-box a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.suggestion-box a:hover {
-  text-decoration: underline;
-}
-
-/* Metas Section */
+/* Conteúdo principal */
 .main-content {
   width: 70%;
   padding: 20px;
 }
 
 .main-content h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
   margin-bottom: 20px;
   color: #444;
 }
 
+/* Grade das metas */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  gap: 20px;
   justify-items: center;
 }
 
 .grid-item {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   background-color: #d3d3d3;
   border-radius: 15px;
   display: flex;
@@ -97,29 +89,25 @@ body {
 }
 
 .grid-item img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
 .grid-item p {
   margin-top: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
 }
 
+/* Tabela */
 .static-table {
-  margin-top: 40px;
-  margin-bottom: 100px;
-}
-
-.static-table h2 {
-  text-align: center;
+  margin-top: 30px;
+  overflow-x: auto;
 }
 
 .static-table table {
   width: 100%;
   border-collapse: collapse;
-
 }
 
 .static-table th,
@@ -134,19 +122,11 @@ body {
   font-weight: bold;
 }
 
-.static-table th {
-  background-color: #e0e0e0a1;
-  font-weight: bold;
-}
-
 .static-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.static-table tr:hover {
-  background-color: #f1f1f1;
-}
-
+/* Botão de logout */
 .logout-button {
   padding: 10px 20px;
   margin-top: 25px;
@@ -159,5 +139,85 @@ body {
 
 .logout-button:hover {
   background-color: #ff1a1a;
+}
 
+/* ================================== */
+/* RESPONSIVIDADE PARA TELAS MENORES */
+/* ================================== */
+@media (max-width: 1024px) {
+  .container1 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .grid-item {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .grid-item {
+    width: 120px;
+    height: 120px;
+  }
+
+  .main-content h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container1 {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+
+  .grid-item {
+    width: 100px;
+    height: 100px;
+  }
+
+  .grid-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .static-table {
+    overflow-x: auto;
+  }
 }

@@ -17,7 +17,9 @@ export const Home = () => {
   useEffect(() => {
     if (userData) {
       axios
-        .get(`http://localhost:5000/teste/${userData.name}`)
+        .get(`/api/teste/${userData.cpf}`, {
+          headers: {"Content-Type" : "application/json"},
+        })
         .then((response) => {
           console.log("Resposta do backend:", response.data); // Debug
           setUserGoals(response.data);

@@ -8,7 +8,7 @@ import "./Login.css";
 import "../../App.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth(); // Função de login do contexto
@@ -17,21 +17,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-    if (!username || !password) {
+
+    if (!cpf || !password) {
       setError("Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        username,
-        password,
-      });
+      const response = await axios.post("/api/login", {
+        cpf,
+        password
+      },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true, // Necessário para autenticação baseada em cookies
+        }
+      );
 
       const { token, user } = response.data; // Recebe o token e os dados do usuário
       if (token) {
         login(token, user); // Armazena o token e os dados do usuário no contexto
+        console.log("Login bem-sucedido! Redirecionando para /home...");
         navigate("/home"); // Redireciona para a página de destino
       }
     } catch (err) {
@@ -52,8 +58,8 @@ const Login = () => {
             type="text"
             placeholder="CPF EX: 12345678901"
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
           />
           <FaUser className="icon" />
         </div>
@@ -71,12 +77,6 @@ const Login = () => {
 
         {error && <p className="error-message">{error}</p>}
 
-        <div className="recall-forget">
-          <label>
-            <input type="checkbox" />
-            Lembrar dados
-          </label>
-        </div>
 
         <button type="submit">Entrar</button>
       </form>
