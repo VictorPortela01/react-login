@@ -24,7 +24,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("/api/login", {
+      const response = await axios.post("https://backend-production-f621.up.railway.app/api/login", {
         cpf,
         password
       },

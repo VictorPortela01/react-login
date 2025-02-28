@@ -17,11 +17,10 @@ export const Home = () => {
   useEffect(() => {
     if (userData) {
       axios
-        .get(`/api/teste/${userData.cpf}`, {
+        .get(`https://backend-production-f621.up.railway.app/api/teste/${userData.cpf}`, {
           headers: {"Content-Type" : "application/json"},
         })
         .then((response) => {
-          console.log("Resposta do backend:", response.data); // Debug
           setUserGoals(response.data);
         })
         .catch((error) => {
