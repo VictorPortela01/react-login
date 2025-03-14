@@ -122,15 +122,15 @@ export const Home = () => {
               </div>
               <div className="grid-item">
                 <p>Combustível</p>
-                <p>{userGoals.combustivel}</p>
+                <p>{userGoals.combustivel || 'N/A'}</p>
               </div>
               <div className="grid-item">
                 <p>Avarias</p>
-                <p>{userGoals.avarias}</p>
+                <p>{userGoals.avarias || 'N/A'}</p>
               </div>
               <div className="grid-item">
                 <p>Tendencias</p>
-                <p>{userGoals.tendencias}</p>
+                <p>{userGoals.tendencias || 'N/A'}</p>
               </div>
             </div>
           )}
