@@ -93,35 +93,43 @@ export const Home = () => {
               {/* Caixa específica para motorista */}
 
               <div className="grid-item">
-                <p>RATING</p>
-                <p>{userGoals.rating || 'N/A'}</p>
+                <p>Resposta Rating</p>
+                <p>{userGoals.taxaRespostaRating || 'N/A'}</p>
               </div>
               <div className="grid-item">
-                <p>DEVOLUÇÃO</p>
-                <p>{userGoals.devolução || 'N/A'}</p>
+                <p>Avaliação Rating</p>
+                <p>{userGoals.avaliacaoRating || 'N/A'}</p>
               </div>
               <div className="grid-item">
-                <p>CHECKLIST</p>
-                <p>{userGoals.checklist || 'N/A'}</p>
-              </div>
-              <div className="grid-item">
-                <p>COMBUSTÍVEL</p>
-                <p>{userGoals.combustivel || 'N/A'}</p>
+                <p>Apontamento BEES</p>
+                <p>{userGoals.apotamentoBeesDel || 'N/A'}</p>
               </div>
               <div className="grid-item">
                 <p>TML</p>
                 <p>{userGoals.tml || 'N/A'}</p>
               </div>
               <div className="grid-item">
-                <p>VALES</p>
+                <p>Vales</p>
                 <p>{userGoals.vales || 'N/A'}</p>
               </div>
               <div className="grid-item">
-                <p>BOLETO</p>
+                <p>Boleto</p>
                 <p>{userGoals.boleto || 'N/A'}</p>
               </div>
               <div className="grid-item">
-                <p>TENDECIA</p>
+                <p>Devolução</p>
+                <p>{userGoals.devolucao || 'N/A'}</p>
+              </div>
+              <div className="grid-item">
+                <p>Combustível</p>
+                <p>{userGoals.combustivel}</p>
+              </div>
+              <div className="grid-item">
+                <p>Avarias</p>
+                <p>{userGoals.avarias}</p>
+              </div>
+              <div className="grid-item">
+                <p>Tendencias</p>
                 <p>{userGoals.tendencias}</p>
               </div>
             </div>
