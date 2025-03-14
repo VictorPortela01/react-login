@@ -63,24 +63,24 @@ export const Home = () => {
             <table>
               <thead>
                 <tr>
-                  <th>RATING</th>
+                  <th>Resposta Rating</th>
+                  <th>Avaliação Rating</th>
+                  <th>Apont. BEES</th>
                   <th>TML</th>
-                  <th>DEVOLUÇÃO</th>
-                  <th>VALES</th>
-                  <th>CHECKLIST</th>
-                  <th>BOLETO</th>
-                  <th>COMBUSTIVEL</th>
+                  <th>Vales</th>
+                  <th>Boleto</th>
+                  <th>Aderência RAIO</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>4.95</td>
+                  <td>40%</td>
+                  <td>4,93</td>
+                  <td>95%</td>
                   <td>30:00</td>
-                  <td>2,00%</td>
                   <td>2,00</td>
-                  <td>90%</td>
-                  <td>0</td>
-                  <td>BATEU | NÃO BATEU</td>
+                  <td>0,00</td>
+                  <td>40%</td>
                 </tr>
               </tbody>
             </table>
