@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-import './home.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Loading from "../layouts/Loading.jsx";
+import "./home.css";
 import { useAuth } from "../../Contexts/AuthContext";
-
 
 export const Home = () => {
   const { userData } = useAuth(); // Pega os dados do usuário autenticado
   const { logout } = useAuth();
   const [userGoals, setUserGoals] = useState({}); // Declaração correta do estado
+  const [ loading, setLoading ] = useState(false)
 
   const handleLogout = () => {
     logout(); // Limpa os dados do usuário
@@ -16,30 +17,39 @@ export const Home = () => {
 
   useEffect(() => {
     if (userData) {
-      axios
-        .get(`https://backend-production-f621.up.railway.app/api/teste/${userData.cpf}`, {
-          headers: {"Content-Type" : "application/json"},
-        })
-        .then((response) => {
-          setUserGoals(response.data);
-        })
-        .catch((error) => {
-          console.error("Erro ao carregar dados do usuário:", error);
-        });
+      setLoading(true);
+      
+      setTimeout(() => {
+        axios
+          .get(`https://backend-production-f621.up.railway.app/api/teste/${userData.cpf}`, {
+            headers: { "Content-Type": "application/json" },
+          })
+          .then((response) => {
+            setUserGoals(response.data);
+          })
+          .catch((error) => {
+            console.error("Erro ao carregar dados do usuário:", error);
+          })
+          .finally(() => {
+            setLoading(false); //Remove o loading após receber os dados
+          })
+      }, 300); // Correção: Removendo colchetes do setTimeout
     }
-  }, [userData])
+  }, [userData]);
+  
+  // Se estiver carregando, exibe a tela de Loading
+  if (loading) {
+    return <Loading />;
+  } 
 
-  if (!userData || userGoals === null) {
-    return <p>Carregando dados do usuário...</p>;
-  }
-
-  if (Object.keys(userGoals).length === 0) {
-    return <p>Nenhuma meta encontrada para o usuário.</p>;
-  }
+ // Se `userGoals` existir mas estiver vazio, exibe a mensagem
+if (userGoals && Object.keys(userGoals).length === 0) {
+  return <p>Nenhuma meta encontrada para o usuário.</p>;
+}
 
   // Condicional para verificar a função e renderizar caixas específicas
-  const isMotorista = userData.função === 'MOTORISTA';
-  const isAjudante = userData.função === 'AJUDANTE';
+  const isMotorista = userData.função === "MOTORISTA";
+  const isAjudante = userData.função === "AJUDANTE";
 
   return (
     <div>
@@ -56,7 +66,6 @@ export const Home = () => {
             <p>Número do TI</p>
             <p>(85) 8105-9651</p>
           </div>
-
         </div>
         <div className="main-content">
           <div className="static-table">
@@ -88,49 +97,48 @@ export const Home = () => {
           <h1>METAS({userData.função})</h1>
           {/* Renderizar caixas específicas dependendo da função */}
           {isMotorista && (
-
             <div className="grid-container">
               {/* Caixa específica para motorista */}
 
               <div className="grid-item">
                 <p>Resposta Rating</p>
-                <p>{userGoals.taxaRespostaRating || 'N/A'}</p>
+                <p>{userGoals.taxaRespostaRating || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Avaliação Rating</p>
-                <p>{userGoals.avaliacaoRating || 'N/A'}</p>
+                <p>{userGoals.avaliacaoRating || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Apontamento BEES</p>
-                <p>{userGoals.apotamentoBeesDel || 'N/A'}</p>
+                <p>{userGoals.apotamentoBeesDel || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>TML</p>
-                <p>{userGoals.tml || 'N/A'}</p>
+                <p>{userGoals.tml || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Vales</p>
-                <p>{userGoals.vales || 'N/A'}</p>
+                <p>{userGoals.vales || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Boleto</p>
-                <p>{userGoals.boleto || 'N/A'}</p>
+                <p>{userGoals.boleto || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Devolução</p>
-                <p>{userGoals.devolucao || 'N/A'}</p>
+                <p>{userGoals.devolucao || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Combustível</p>
-                <p>{userGoals.combustivel || 'N/A'}</p>
+                <p>{userGoals.combustivel || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Avarias</p>
-                <p>{userGoals.avarias || 'N/A'}</p>
+                <p>{userGoals.avarias || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>Tendencias</p>
-                <p>{userGoals.tendencias || 'N/A'}</p>
+                <p>{userGoals.tendencias || "N/A"}</p>
               </div>
             </div>
           )}
@@ -139,21 +147,21 @@ export const Home = () => {
             <div className="grid-container">
               {/* Caixa específica para ajudante */}
               <div className="grid-item">
-                <p>RATING</p>
-                <p>{userGoals.rating || 'N/A'}</p>
+                <p>Avaliação Rating</p>
+                <p>{userGoals.avaliacaoRating || "N/A"}</p>
               </div>
               <div className="grid-item">
-                <p>DEVOLUÇÃO</p>
-                <p>{userGoals.devolução || 'N/A'}</p>
+                <p>Apontamento BEES</p>
+                <p>{userGoals.apotamentoBeesDel || "N/A"}</p>
               </div>
 
               <div className="grid-item">
                 <p>TML</p>
-                <p>{userGoals.tml || 'N/A'}</p>
+                <p>{userGoals.tml || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>VALES</p>
-                <p>{userGoals.vales || 'N/A'}</p>
+                <p>{userGoals.vales || "N/A"}</p>
               </div>
               <div className="grid-item">
                 <p>TENDECIA</p>
@@ -169,6 +177,6 @@ export const Home = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
