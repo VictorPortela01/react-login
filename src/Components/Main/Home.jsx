@@ -133,10 +133,6 @@ if (userGoals && Object.keys(userGoals).length === 0) {
                 <p>{userGoals.combustivel || "N/A"}</p>
               </div>
               <div className="grid-item">
-                <p>Avarias</p>
-                <p>{userGoals.avarias || "N/A"}</p>
-              </div>
-              <div className="grid-item">
                 <p>Tendencias</p>
                 <p>{userGoals.tendencias || "N/A"}</p>
               </div>
@@ -154,7 +150,6 @@ if (userGoals && Object.keys(userGoals).length === 0) {
                 <p>Apontamento BEES</p>
                 <p>{userGoals.apotamentoBeesDel || "N/A"}</p>
               </div>
-
               <div className="grid-item">
                 <p>TML</p>
                 <p>{userGoals.tml || "N/A"}</p>
