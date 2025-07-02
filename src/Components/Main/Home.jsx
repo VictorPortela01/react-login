@@ -20,8 +20,8 @@ export const Home = () => {
       setLoading(true);
       
       setTimeout(() => {
-        axios
-          .get(`https://backend-production-f621.up.railway.app/api/teste/${userData.cpf}`, {
+        axios // Mudar o Link do backend-production-aa59.up.railway.app 
+          .get(`backend-production-0a37.up.railway.app/api/teste/${userData.cpf}`, {
             headers: { "Content-Type": "application/json" },
           })
           .then((response) => {
@@ -65,6 +65,8 @@ if (userGoals && Object.keys(userGoals).length === 0) {
             <h4>Envie sua Sugestão</h4>
             <p>Número do TI</p>
             <p>(85) 8105-9651</p>
+            <p>Número do CME</p>
+            <p>(88) 8178-5387</p>
           </div>
         </div>
         <div className="main-content">
